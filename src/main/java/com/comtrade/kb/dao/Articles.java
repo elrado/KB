@@ -21,6 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -37,7 +39,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Articles implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@NotNull(message = "errors.article.defined" )
 	private Integer articleId;
+	@NotNull
+	@Size(min = 5,max = 500, message = "{errors.article.description.size}")
 	private String description;
 	private Collection<ArticleDetails> articleDetailsCollection;
 

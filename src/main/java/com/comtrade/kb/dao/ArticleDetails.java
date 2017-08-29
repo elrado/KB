@@ -19,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -37,11 +39,14 @@ public class ArticleDetails implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
         @Column(name = "ARTICLE_DETAIL_ID")
+	@NotNull(message = "errors.articleDetails.defined")
 	private Integer articleDetailId;
 	@Column(name = "DESCRIPTION")
+	@Size(min = 5, message = "{errors.articleDetails.description.size}")
 	private String description;
 	@JoinColumn(name = "ARTICLE_ID", referencedColumnName = "ARTICLE_ID")
         @ManyToOne(fetch = FetchType.LAZY)
+	@NotNull(message = "errors.article.defined")
 	private Articles articleId;
 
 	public ArticleDetails() {
